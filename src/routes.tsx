@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import { Home } from './pages/Home.tsx';
 import { Form } from './components/Form.tsx';
+import { About } from './pages/About.tsx';
 
 const routes = [
   
@@ -16,7 +17,11 @@ const routes = [
         {
           path: "/form",
           element: <Form />,
-        }
+        },
+        {
+          path: "/about",
+          element: <About />,
+        },
       ],
     }
   ];

@@ -1,5 +1,28 @@
 {
-    "welcome": "Bem-vindo ao Nosso Tempo",
-    "create_site": "Crie seu site personalizado",
-    "submit": "Enviar"
-}  
+    "home": {
+      "welcome": "Bem-vindo ao Nosso Tempo",
+      "create_site": "Crie seu site personalizado",
+      "submit": "Enviar"
+    },
+    "form": {
+      "create_site": "Crie Seu Site",
+      "title": "Título",
+      "enter_title": "Digite o título do seu site",
+      "message": "Mensagem",
+      "enter_message": "Digite sua mensagem ou dedicatória",
+      "relationship_start_date": "Data de Início do Relacionamento",
+      "upload_photos": "Enviar Fotos",
+      "submit": "Enviar",
+      "form_submitted": "Formulário enviado!"
+    },
+    "about": {
+      "title": "Sobre Nós",
+      "content": "Esta é uma página temporária sobre o projeto. Aqui você pode colocar informações sobre o sistema e sua proposta.",
+      "back": "Voltar para Home"
+    },
+    "common": {
+      "cancel": "Cancelar",
+      "save": "Salvar"
+    }
+  }
+  

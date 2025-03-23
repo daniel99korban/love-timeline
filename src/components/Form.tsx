@@ -25,23 +25,23 @@ export const Form = () => {
     
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4 relative">
-      {/* Language dropdown in the top-right corner */}
+      {/* Dropdown de idioma no canto superior direito */}
       <div className="absolute top-4 right-4">
         <LanguageDropdown />
       </div>
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4 text-center">{t('create_site')}</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">{t('form.create_site')}</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
-              {t('title')}
+              {t('form.title')}
             </label>
             <input
               id="title"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder={t('enter_title')}
+              placeholder={t('form.enter_title')}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             />
@@ -49,13 +49,13 @@ export const Form = () => {
 
           <div className="mb-4">
             <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">
-              {t('message')}
+              {t('form.message')}
             </label>
             <textarea
               id="message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder={t('enter_message')}
+              placeholder={t('form.enter_message')}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               rows={3}
               required
@@ -64,7 +64,7 @@ export const Form = () => {
 
           <div className="mb-4">
             <label htmlFor="relationshipDate" className="block text-gray-700 text-sm font-bold mb-2">
-              {t('relationship_start_date')}
+              {t('form.relationship_start_date')}
             </label>
             <input
               id="relationshipDate"
@@ -78,7 +78,7 @@ export const Form = () => {
 
           <div className="mb-4">
             <label htmlFor="photos" className="block text-gray-700 text-sm font-bold mb-2">
-              {t('upload_photos')}
+              {t('form.upload_photos')}
             </label>
             <input
               id="photos"
@@ -94,7 +94,7 @@ export const Form = () => {
               type="submit"
               className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              {t('submit')}
+              {t('form.submit')}
             </button>
           </div>
         </form>

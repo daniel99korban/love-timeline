@@ -1,5 +1,28 @@
 {
-    "welcome": "Welcome to Our Time",
-    "create_site": "Create your personalized website",
-    "submit": "Submit"
-}
+    "home": {
+      "welcome": "Welcome to Our Time",
+      "create_site": "Create your personalized website",
+      "submit": "Submit"
+    },
+    "form": {
+      "create_site": "Create Your Site",
+      "title": "Title",
+      "enter_title": "Enter your site title",
+      "message": "Message",
+      "enter_message": "Enter your message or dedication",
+      "relationship_start_date": "Relationship Start Date",
+      "upload_photos": "Upload Photos",
+      "submit": "Submit",
+      "form_submitted": "Form submitted!"
+    },
+    "about": {
+      "title": "About Us",
+      "content": "This is a temporary about page. Here you can add information about the project and its proposal.",
+      "back": "Back to Home"
+    },
+    "common": {
+      "cancel": "Cancel",
+      "save": "Save"
+    }
+  }
+  
