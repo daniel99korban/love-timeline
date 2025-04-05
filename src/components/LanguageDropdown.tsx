@@ -44,7 +44,7 @@ export const LanguageDropdown = () => {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 bg-gray-200 p-2 rounded"
+        className="flex items-center space-x-2 bg-gray-900 p-2 rounded text-white"
       >
         <img
           src={currentLang.flagSrc}
@@ -54,12 +54,12 @@ export const LanguageDropdown = () => {
         <span className="text-sm">{currentLang.label}</span>
       </button>
       {isOpen && (
-        <ul className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded">
+        <ul className="absolute right-0 mt-2 w-40 bg-gray-900 shadow-lg rounded text-white">
           {languages.map(lang => (
             <li key={lang.code}>
               <button
                 onClick={() => handleLanguageChange(lang)}
-                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center space-x-2"
+                className="w-full text-left px-4 py-2 hover:bg-gray-600 flex items-center space-x-2"
               >
                 <img
                   src={lang.flagSrc}

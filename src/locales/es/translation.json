@@ -6,24 +6,68 @@
   },
   "home": {
     "welcome": "Bienvenido a Nuestro Tiempo",
-    "create_site": "Crea tu sitio web personalizado",
-    "submit": "Enviar"
+    "create_site": "Crea tu sitio personalizado",
+    "submit": "Enviar",
+    "hero": {
+      "title": "Celebra el Amor con un Sitio Inolvidable",
+      "subtitle": "Crea un sitio personalizado para inmortalizar tu historia de amor."
+    },
+    "steps": {
+      "title": "Cómo Funciona",
+      "items": [
+        "Elige un nombre y un mensaje especial",
+        "Agrega tus fotos favoritas",
+        "Indica la fecha de inicio de la relación",
+        "¡Compártelo con el mundo!"
+      ]
+    },
+    "pricing": {
+      "title": "Planes y Precios",
+      "monthly": "Plan Mensual",
+      "yearly": "Plan Anual",
+      "price_month": "$1.99/mes",
+      "price_year": "$19.99/año",
+      "features": [
+        "Galería de fotos ilimitada",
+        "Contador de amor en tiempo real",
+        "Enlaces a redes sociales",
+        "Acceso a temas exclusivos"
+      ]
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "questions": [
+        {
+          "q": "¿Puedo editar el sitio después de crearlo?",
+          "a": "¡Sí! Puedes actualizar el contenido de tu sitio en cualquier momento."
+        },
+        {
+          "q": "¿Necesito pagar para crear el sitio?",
+          "a": "Ofrecemos planes accesibles, pero puedes comenzar con una prueba gratuita."
+        },
+        {
+          "q": "¿El sitio es seguro?",
+          "a": "Sí. Garantizamos la privacidad y seguridad de tus datos y fotos."
+        }
+      ]
+    },
+    "cta": "Empieza Ahora"
   },
   "form": {
     "create_site": "Crea Tu Sitio",
     "title": "Título",
     "enter_title": "Ingresa el título de tu sitio",
     "message": "Mensaje",
-    "enter_message": "Ingresa tu mensaje o dedicatoria",
+    "enter_message": "Escribe tu mensaje o dedicatoria",
     "relationship_start_date": "Fecha de Inicio de la Relación",
     "upload_photos": "Subir Fotos",
     "submit": "Enviar",
     "form_submitted": "¡Formulario enviado!"
   },
   "about": {
-    "title": "Sobre Nosotros",
-    "content": "Esta es una página temporal sobre el proyecto. Aquí puedes poner información sobre el sistema y su propuesta.",
-    "back": "Volver a Inicio"
+    "title": "Acerca de Nosotros",
+    "content": "Esta es una página temporal sobre el proyecto. Aquí puedes colocar información sobre el sistema y su propuesta.",
+    "back": "Volver al Inicio"
   },
   "common": {
     "cancel": "Cancelar",
@@ -34,4 +78,4 @@
     "privacy_policy": "Política de Privacidad",
     "terms_of_use": "Términos de Uso"
   }
-}  
+}

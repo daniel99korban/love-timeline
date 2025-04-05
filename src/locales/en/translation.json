@@ -7,14 +7,58 @@
   "home": {
     "welcome": "Welcome to Our Time",
     "create_site": "Create your personalized website",
-    "submit": "Submit"
+    "submit": "Submit",
+    "hero": {
+      "title": "Celebrate Love with a Memorable Website",
+      "subtitle": "Create a personalized site to eternalize your love story."
+    },
+    "steps": {
+      "title": "How It Works",
+      "items": [
+        "Choose a name and a special message",
+        "Add your favorite photos",
+        "Enter the relationship start date",
+        "Share it with the world!"
+      ]
+    },
+    "pricing": {
+      "title": "Plans and Pricing",
+      "monthly": "Monthly Plan",
+      "yearly": "Yearly Plan",
+      "price_month": "$1.99/month",
+      "price_year": "$19.99/year",
+      "features": [
+        "Unlimited photo gallery",
+        "Real-time love timer",
+        "Social media links",
+        "Access to exclusive themes"
+      ]
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "questions": [
+        {
+          "q": "Can I edit the site after creating it?",
+          "a": "Yes! You can update your site content at any time."
+        },
+        {
+          "q": "Do I need to pay to create a site?",
+          "a": "We offer affordable plans, but you can start with a free trial."
+        },
+        {
+          "q": "Is the site secure?",
+          "a": "Yes. We ensure the privacy and security of your data and photos."
+        }
+      ]
+    },
+    "cta": "Start Now"
   },
   "form": {
-    "create_site": "Create Your Site",
+    "create_site": "Create Your Website",
     "title": "Title",
     "enter_title": "Enter your site title",
     "message": "Message",
-    "enter_message": "Enter your message or dedication",
+    "enter_message": "Type your message or dedication",
     "relationship_start_date": "Relationship Start Date",
     "upload_photos": "Upload Photos",
     "submit": "Submit",
@@ -22,7 +66,7 @@
   },
   "about": {
     "title": "About Us",
-    "content": "This is a temporary about page. Here you can add information about the project and its proposal.",
+    "content": "This is a temporary about page for the project. You can place information about the system and its proposal here.",
     "back": "Back to Home"
   },
   "common": {
@@ -35,4 +79,3 @@
     "terms_of_use": "Terms of Use"
   }
 }
-  

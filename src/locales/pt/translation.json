@@ -7,7 +7,51 @@
   "home": {
     "welcome": "Bem-vindo ao Nosso Tempo",
     "create_site": "Crie seu site personalizado",
-    "submit": "Enviar"
+    "submit": "Enviar",
+    "hero": {
+      "title": "Celebre o Amor com um Site Inesquecível",
+      "subtitle": "Crie um site personalizado para eternizar sua história de amor."
+    },
+    "steps": {
+      "title": "Como Funciona",
+      "items": [
+        "Escolha um nome e uma mensagem especial",
+        "Adicione suas fotos favoritas",
+        "Informe a data de início do relacionamento",
+        "Compartilhe com o mundo!"
+      ]
+    },
+    "pricing": {
+      "title": "Planos e Preços",
+      "monthly": "Plano Mensal",
+      "yearly": "Plano Anual",
+      "price_month": "R$ 9,90/mês",
+      "price_year": "R$ 99,00/ano",
+      "features": [
+        "Galeria de fotos ilimitada",
+        "Contador de tempo em tempo real",
+        "Links para redes sociais",
+        "Acesso a temas exclusivos"
+      ]
+    },
+    "faq": {
+      "title": "Dúvidas Frequentes",
+      "questions": [
+        {
+          "q": "Posso editar o site depois de criado?",
+          "a": "Sim! Você pode editar o conteúdo do seu site a qualquer momento."
+        },
+        {
+          "q": "Preciso pagar para criar o site?",
+          "a": "Oferecemos planos acessíveis, mas você pode começar com um período gratuito."
+        },
+        {
+          "q": "O site é seguro?",
+          "a": "Sim. Garantimos privacidade e segurança dos seus dados e fotos."
+        }
+      ]
+    },
+    "cta": "Comece Agora"
   },
   "form": {
     "create_site": "Crie Seu Site",
@@ -34,5 +78,4 @@
     "privacy_policy": "Política de Privacidade",
     "terms_of_use": "Termos de Uso"
   }
-  }
-  
+}
