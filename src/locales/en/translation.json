@@ -62,7 +62,14 @@
     "relationship_start_date": "Relationship Start Date",
     "upload_photos": "Upload Photos",
     "submit": "Submit",
-    "form_submitted": "Form submitted!"
+    "form_submitted": "Form submitted!",
+    "max_photos": "Maximum 12 photos allowed",
+    "drop_photos_here": "Drop photos here...",
+    "drag_drop_photos": "Drag & drop photos here, or click to browse",
+    "browse_files": "Browse files",
+    "select_date": "Select a date",
+    "default_title": "Our Love Story",
+    "default_message": "Your special message will appear here..."
   },
   "about": {
     "title": "About Us",
@@ -71,7 +78,10 @@
   },
   "common": {
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "years": "Years",
+    "months": "Months",
+    "days": "Days"
   },
   "footer": {
     "copyright": "© 2025 MDK Studio. All rights reserved.",

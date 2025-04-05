@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .scrollbar-thumb-pink-500\/30::-webkit-scrollbar-thumb {
+    background-color: rgba(236, 72, 153, 0.3);
+    border-radius: 4px;
+  }

@@ -19,7 +19,7 @@ export const FaqSection = ({ title, questions }: FaqProps) => {
     };
 
   return (
-    <section className="bg-gray-900 py-16 px-4">
+    <section className="bg-gray-950 py-16 px-4">
       <h2 className="text-3xl font-semibold mb-8 text-center text-white">{title}</h2>
       <div className="max-w-3xl mx-auto space-y-4">
         {questions.map((faq, idx) => {
