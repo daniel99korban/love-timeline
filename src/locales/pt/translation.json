@@ -25,14 +25,16 @@
       "title": "Planos e Preços",
       "monthly": "Plano Mensal",
       "yearly": "Plano Anual",
-      "price_month": "R$ 9,90/mês",
-      "price_year": "R$ 99,00/ano",
+      "select_currency": "Escolha a moeda",
       "features": [
         "Galeria de fotos ilimitada",
         "Contador de tempo em tempo real",
         "Links para redes sociais",
         "Acesso a temas exclusivos"
-      ]
+      ],
+      "per_month": "mês",
+      "per_year": "ano",
+      "best_value": "Melhor Valor"
     },
     "faq": {
       "title": "Dúvidas Frequentes",

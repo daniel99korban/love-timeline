@@ -14,15 +14,18 @@
     "@tailwindcss/vite": "^4.0.15",
     "date-fns": "^4.1.0",
     "i18next": "^24.2.3",
+    "locale-currency": "^0.0.4",
     "lucide-react": "^0.487.0",
     "react": "^19.0.0",
+    "react-currency-input-field": "^3.10.0",
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",
     "react-i18next": "^15.4.1",
     "react-icons": "^5.5.0",
     "react-router": "^7.4.0",
     "react-router-dom": "^7.4.0",
-    "tailwindcss": "^4.0.15"
+    "tailwindcss": "^4.0.15",
+    "tz-geo-currency": "^1.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

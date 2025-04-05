@@ -25,14 +25,16 @@
       "title": "Planes y Precios",
       "monthly": "Plan Mensual",
       "yearly": "Plan Anual",
-      "price_month": "$1.99/mes",
-      "price_year": "$19.99/año",
+      "select_currency": "Selecciona la moneda",
       "features": [
         "Galería de fotos ilimitada",
         "Contador de amor en tiempo real",
         "Enlaces a redes sociales",
         "Acceso a temas exclusivos"
-      ]
+      ],
+      "per_month": "mes",
+      "per_year": "año",
+      "best_value": "Mejor Valor"
     },
     "faq": {
       "title": "Preguntas Frecuentes",

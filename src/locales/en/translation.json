@@ -25,14 +25,16 @@
       "title": "Plans and Pricing",
       "monthly": "Monthly Plan",
       "yearly": "Yearly Plan",
-      "price_month": "$1.99/month",
-      "price_year": "$19.99/year",
+      "select_currency": "Select currency",
       "features": [
         "Unlimited photo gallery",
         "Real-time love timer",
         "Social media links",
         "Access to exclusive themes"
-      ]
+      ],
+      "per_month": "month",
+      "per_year": "year",
+      "best_value": "Best Value"
     },
     "faq": {
       "title": "Frequently Asked Questions",

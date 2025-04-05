@@ -1,0 +1,129 @@
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+type Currency = 'BRL' | 'USD' | 'EUR';
+
+const currencySymbols: Record<Currency, string> = {
+  BRL: 'R$',
+  USD: '$',
+  EUR: '€',
+};
+
+const defaultPrices: Record<Currency, { month: number; year: number }> = {
+  BRL: { month: 39, year: 390 },
+  USD: { month: 9, year: 90 },
+  EUR: { month: 8, year: 80 },
+};
+
+const supportedCurrencies: Currency[] = ['BRL', 'USD', 'EUR'];
+
+export const PricingSection = () => {
+  const { t } = useTranslation();
+  const [currency, setCurrency] = useState<Currency>('USD');
+  const [userCanChoose, setUserCanChoose] = useState(false);
+
+  const pricingFeatures = Array.isArray(t('home.pricing.features', { returnObjects: true }))
+    ? (t('home.pricing.features', { returnObjects: true }) as string[])
+    : [];
+
+  useEffect(() => {
+    const detectCurrency = () => {
+      try {
+        const locale = Intl.DateTimeFormat().resolvedOptions().locale;
+        const region = locale.split('-')[1]?.toUpperCase();
+
+        const regionToCurrency: Record<string, Currency> = {
+          BR: 'BRL',
+          US: 'USD',
+          PT: 'EUR',
+          DE: 'EUR',
+          FR: 'EUR',
+          ES: 'EUR',
+          IT: 'EUR',
+        };
+
+        const detected = regionToCurrency[region] || 'USD';
+
+        if (supportedCurrencies.includes(detected as Currency)) {
+          setCurrency(detected as Currency);
+          setUserCanChoose(false);
+        } else {
+          setCurrency('USD');
+          setUserCanChoose(true);
+        }
+      } catch {
+        setCurrency('USD');
+        setUserCanChoose(true);
+      }
+    };
+
+    detectCurrency();
+  }, []);
+
+  const { month, year } = defaultPrices[currency];
+  const symbol = currencySymbols[currency];
+
+  return (
+    <section className="py-20 px-6 bg-gray-950 text-center">
+      <h2 className="text-4xl font-bold text-white mb-4">{t('home.pricing.title')}</h2>
+      <p className="text-gray-400 mb-10 text-lg">{t('home.pricing.subtitle')}</p>
+
+      {userCanChoose && (
+        <div className="mb-10">
+          <label htmlFor="currency" className="mr-2 font-medium text-gray-300">
+            {t('home.pricing.select_currency')}
+          </label>
+          <select
+            id="currency"
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value as Currency)}
+            className="bg-gray-800 text-white border border-gray-600 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            {supportedCurrencies.map((cur) => (
+              <option key={cur} value={cur}>
+                {currencySymbols[cur]} {cur}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {/* Monthly Plan */}
+        <div className="bg-gray-900 p-8 rounded-2xl shadow-xl border border-gray-800 hover:scale-105 transition-transform duration-300">
+          <h3 className="text-2xl font-bold text-white mb-2">{t('home.pricing.monthly')}</h3>
+          <p className="text-3xl font-semibold text-indigo-400 mb-6">
+            {symbol} {month}
+            <span className="text-base text-gray-400"> / {t('home.pricing.per_month')}</span>
+          </p>
+          <ul className="text-left space-y-3 text-gray-300">
+            {pricingFeatures.map((feature, idx) => (
+              <li key={idx} className="flex items-start gap-2">
+                <span className="text-indigo-400">✓</span> {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Yearly Plan */}
+        <div className="relative bg-indigo-950 p-8 rounded-2xl shadow-2xl border-2 border-indigo-500 hover:scale-105 transition-transform duration-300">
+          <span className="absolute -top-3 right-4 bg-indigo-600 text-white text-sm font-semibold px-3 py-1 rounded-full shadow-md">
+            {t('home.pricing.best_value')}
+          </span>
+          <h3 className="text-2xl font-bold text-white mb-2">{t('home.pricing.yearly')}</h3>
+          <p className="text-3xl font-semibold text-indigo-300 mb-6">
+            {symbol} {year}
+            <span className="text-base text-gray-400"> / {t('home.pricing.per_year')}</span>
+          </p>
+          <ul className="text-left space-y-3 text-gray-300">
+            {pricingFeatures.map((feature, idx) => (
+              <li key={idx} className="flex items-start gap-2">
+                <span className="text-indigo-400">✓</span> {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+};
