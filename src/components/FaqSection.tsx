@@ -10,7 +10,7 @@ interface FaqProps {
   questions: FaqItem[];
 }
 
-export const Faq = ({ title, questions }: FaqProps) => {
+export const FaqSection = ({ title, questions }: FaqProps) => {
 
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 

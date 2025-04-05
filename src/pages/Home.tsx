@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Faq } from '../components/faq';
+import { FaqSection } from '../components/FaqSection';
 
 export const Home = () => {
   const { t } = useTranslation();
@@ -93,7 +93,7 @@ export const Home = () => {
       </section>
 
       {/* FAQ */}
-      <Faq 
+      <FaqSection
         title={t('home.faq.title')}
         questions={faqQuestions}
       />
