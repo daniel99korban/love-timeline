@@ -27,27 +27,21 @@ export const PricingSection = () => {
     : [];
 
   useEffect(() => {
-    const detectCurrency = () => {
+    const detectCurrency = async () => {
       try {
-        const locale = Intl.DateTimeFormat().resolvedOptions().locale;
-        const region = locale.split('-')[1]?.toUpperCase();
+        // Chamada para a API ipapi.co para obter os dados de localização do usuário
+        const response = await fetch("https://ipapi.co/json/");
+        const data = await response.json();
 
-        const regionToCurrency: Record<string, Currency> = {
-          BR: 'BRL',
-          US: 'USD',
-          PT: 'EUR',
-          DE: 'EUR',
-          FR: 'EUR',
-          ES: 'EUR',
-          IT: 'EUR',
-        };
+        // Utiliza o campo "currency" retornado pela API (ex: "USD", "BRL", "EUR")
+        const apiCurrency = data.currency;
 
-        const detected = regionToCurrency[region] || 'USD';
-
-        if (supportedCurrencies.includes(detected as Currency)) {
-          setCurrency(detected as Currency);
+        // Se a moeda do usuário for suportada, não exibe a seleção.
+        if (supportedCurrencies.includes(apiCurrency as Currency)) {
+          setCurrency(apiCurrency as Currency);
           setUserCanChoose(false);
         } else {
+          // Se a moeda não for suportada, definimos como USD por padrão e permitimos a escolha.
           setCurrency('USD');
           setUserCanChoose(true);
         }
@@ -89,7 +83,7 @@ export const PricingSection = () => {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        {/* Monthly Plan */}
+        {/* Plano Mensal */}
         <div className="bg-gray-900 p-8 rounded-2xl shadow-xl border border-gray-800 hover:scale-105 transition-transform duration-300">
           <h3 className="text-2xl font-bold text-white mb-2">{t('home.pricing.monthly')}</h3>
           <p className="text-3xl font-semibold text-indigo-400 mb-6">
@@ -105,7 +99,7 @@ export const PricingSection = () => {
           </ul>
         </div>
 
-        {/* Yearly Plan */}
+        {/* Plano Anual */}
         <div className="relative bg-indigo-950 p-8 rounded-2xl shadow-2xl border-2 border-indigo-500 hover:scale-105 transition-transform duration-300">
           <span className="absolute -top-3 right-4 bg-indigo-600 text-white text-sm font-semibold px-3 py-1 rounded-full shadow-md">
             {t('home.pricing.best_value')}

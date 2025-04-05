@@ -23,6 +23,7 @@
     },
     "pricing": {
       "title": "Plans and Pricing",
+      "subtitle": "Choose the plan that suits you best",
       "monthly": "Monthly Plan",
       "yearly": "Yearly Plan",
       "select_currency": "Select currency",
