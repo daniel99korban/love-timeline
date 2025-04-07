@@ -28,14 +28,17 @@ const fetchLoveStoryData = async (): Promise<LoveStoryData> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
-        title: "João & Maria",
-        message: "Este é o começo de nossa linda história. Cada dia é uma nova aventura e um motivo a mais para sorrir.",
-        relationshipDate: "2020-05-15",
+        title: "Felipe & Thalia",
+        message: "É estranho como, mesmo nos dias comuns, meu coração faz festa só de pensar em você — como se o universo inteiro tivesse dado uma pausa só pra me lembrar da sorte que eu tenho por ter alguém como você: que me acalma sem dizer nada, que me entende sem que eu precise explicar, e que faz tudo ao meu redor ganhar cor, sentido e calor, como se amar você fosse, na verdade, a forma mais bonita de viver.",
+        relationshipDate: "2025-02-08",
         photos: [
-          "https://via.placeholder.com/600x600.png?text=Capa",
-          "https://via.placeholder.com/150x150.png?text=Foto+1",
-          "https://via.placeholder.com/150x150.png?text=Foto+2",
-          "https://via.placeholder.com/150x150.png?text=Foto+3",
+          "/img_temp/felipe.jpg",
+          "/img_temp/felipe1.jpg",
+          "/img_temp/felipe2.jpg",
+          "/img_temp/felipe3.jpg",
+          "/img_temp/felipe4.jpg",
+          "/img_temp/felipe5.jpg",
+          "/img_temp/felipe6.jpg",
         ],
       });
     }, 2000);
@@ -156,7 +159,7 @@ export const LoveStoryPage = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-purple-900/40 via-transparent to-transparent" />
           </div>
         ))}
-        {[...Array(6 - data.photos.length)].map((_, i) => (
+        {[...Array(7 - data.photos.length)].map((_, i) => (
           <div
             key={`empty-${i}`}
             className="aspect-square rounded-lg border-2 border-dashed border-purple-500/30 bg-purple-900/10 
