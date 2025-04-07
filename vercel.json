@@ -7,6 +7,16 @@
     }
   ],
 
+  "routes": [
+    {
+      "src": "/(.*)",
+      "headers": {
+        "Referrer-Policy": "origin"
+      },
+      "dest": "/index.html"
+    }
+  ],
+
   "headers": [
     {
       "source": "/(.*)",
