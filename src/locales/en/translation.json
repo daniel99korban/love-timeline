@@ -72,7 +72,8 @@
     "browse_files": "Browse files",
     "select_date": "Select a date",
     "default_title": "Our Love Story",
-    "default_message": "Your special message will appear here..."
+    "default_message": "Your special message will appear here...",
+    "loading": "Loading..."
   },
   "about": {
     "title": "About Us",

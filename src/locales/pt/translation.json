@@ -72,7 +72,8 @@
     "browse_files": "Explorar arquivos",
     "select_date": "Selecionar uma data",
     "default_title": "Nossa História de Amor",
-    "default_message": "Sua mensagem especial aparecerá aqui..."
+    "default_message": "Sua mensagem especial aparecerá aqui...",
+    "loading": "Carregando..."
   },
   "about": {
     "title": "Sobre Nós",

@@ -41,13 +41,13 @@ export const RelationshipTimer = ({ startDate }: RelationshipTimerProps) => {
         <span>{t("common.months")}</span>
         <span>{t("common.days")}</span>
       </div>
-      <div className="font-mono text-2xl flex gap-2 mt-4 text-pink-300">
+      {/* <div className="font-mono text-2xl flex gap-2 mt-4 text-pink-300">
         <span>{String(time.hours || 0).padStart(2, "0")}</span>
         <span className="text-purple-400/50">:</span>
         <span>{String(time.minutes || 0).padStart(2, "0")}</span>
         <span className="text-purple-400/50">:</span>
         <span>{String(time.seconds || 0).padStart(2, "0")}</span>
-      </div>
+      </div> */}
     </div>
   );
 };
