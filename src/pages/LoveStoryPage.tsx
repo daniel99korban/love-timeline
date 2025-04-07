@@ -110,7 +110,7 @@ export const LoveStoryPage = () => {
             <img
               src={data.photos[0]}
               alt="Capa"
-              className="w-full h-full object-cover"
+              className="w-3xl h-full object-cover"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-pink-400/30">
