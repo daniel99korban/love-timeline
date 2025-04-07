@@ -171,6 +171,22 @@ export const LoveStoryPage = () => {
           </div>
         ))}
       </section>
+
+      {/* Seção do Player de Música do Spotify */}
+      <section className="mt-8 mx-auto max-w-4xl">
+        <div className="flex justify-center">
+          <iframe
+            src="https://open.spotify.com/embed/track/1DLKuppSYytOuxhtI6KBGu?autoplay=1"
+            width="300"
+            height="380"
+            frameBorder="0"
+            allowTransparency={true}
+            allow="autoplay; encrypted-media"
+            title="Spotify Player - Aliança"
+          ></iframe>
+        </div>
+      </section>
+
     </div>
   );
 };
