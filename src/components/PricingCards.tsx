@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from '@tanstack/react-query';
 
 type Currency = 'BRL' | 'USD' | 'EUR';
 
@@ -10,49 +11,52 @@ const currencySymbols: Record<Currency, string> = {
 };
 
 const defaultPrices: Record<Currency, { month: number; year: number }> = {
-  BRL: { month: 39, year: 390 },
-  USD: { month: 9, year: 90 },
-  EUR: { month: 8, year: 80 },
+  BRL: { month: 11.99, year: 19.99 },
+  USD: { month: 5.99, year: 9.99 },
+  EUR: { month: 5.99, year: 9.99 },
 };
 
 const supportedCurrencies: Currency[] = ['BRL', 'USD', 'EUR'];
+
+const fetchCurrency = async (): Promise<string> => {
+  const response = await fetch("https://ipapi.co/json/");
+  if (!response.ok) throw new Error("Erro na requisição");
+  const data = await response.json();
+  return data.currency;
+};
 
 export const PricingSection = () => {
   const { t } = useTranslation();
   const [currency, setCurrency] = useState<Currency>('USD');
   const [userCanChoose, setUserCanChoose] = useState(false);
 
-  const pricingFeatures = Array.isArray(t('home.pricing.features', { returnObjects: true }))
-    ? (t('home.pricing.features', { returnObjects: true }) as string[])
-    : [];
+  // Usando React Query para buscar e cachear os dados de moeda
+  const { data: apiCurrency, error } = useQuery({
+    queryKey: ['currencyData'],
+    queryFn: fetchCurrency,
+    staleTime: 1000 * 60 * 60, // Cache por 1 hora
+    retry: 2,
+  });
 
   useEffect(() => {
-    const detectCurrency = async () => {
-      try {
-        // Chamada para a API ipapi.co para obter os dados de localização do usuário
-        const response = await fetch("https://ipapi.co/json/");
-        const data = await response.json();
-
-        // Utiliza o campo "currency" retornado pela API (ex: "USD", "BRL", "EUR")
-        const apiCurrency = data.currency;
-
-        // Se a moeda do usuário for suportada, não exibe a seleção.
-        if (supportedCurrencies.includes(apiCurrency as Currency)) {
-          setCurrency(apiCurrency as Currency);
-          setUserCanChoose(false);
-        } else {
-          // Se a moeda não for suportada, definimos como USD por padrão e permitimos a escolha.
-          setCurrency('USD');
-          setUserCanChoose(true);
-        }
-      } catch {
+    if (apiCurrency) {
+      if (supportedCurrencies.includes(apiCurrency as Currency)) {
+        setCurrency(apiCurrency as Currency);
+        setUserCanChoose(false);
+      } else {
         setCurrency('USD');
         setUserCanChoose(true);
       }
-    };
+    } else if (error) {
+      // Em caso de erro, permite a escolha manual
+      setCurrency('USD');
+      setUserCanChoose(true);
+    }
+  }, [apiCurrency, error]);
 
-    detectCurrency();
-  }, []);
+  const pricingFeatures = Array.isArray(t('home.pricing.features', { returnObjects: true }))
+    ? (t('home.pricing.features', { returnObjects: true }) as string[])
+    : [];
 
   const { month, year } = defaultPrices[currency];
   const symbol = currencySymbols[currency];
