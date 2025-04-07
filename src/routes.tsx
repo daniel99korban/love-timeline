@@ -3,6 +3,7 @@ import App from './App.tsx';
 import { Home } from './pages/Home.tsx';
 import { Form } from './components/Form.tsx';
 import { About } from './pages/About.tsx';
+import { LoveStoryPage } from './pages/LoveStoryPage.tsx';
 
 const routes = [
   
@@ -22,6 +23,10 @@ const routes = [
           path: "/about",
           element: <About />,
         },
+        {
+          path: "/:slug",
+          element: <LoveStoryPage />,
+        }
       ],
     }
   ];
