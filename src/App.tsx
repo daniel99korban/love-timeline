@@ -6,7 +6,7 @@ import { Header } from './common/Header';
 function App() {
   const location = useLocation();
 
-  const staticRoutes = ["/", "/form", "/about"];
+  const staticRoutes = ["/", "/form", "/about", "/privacy-policy", "/terms-of-use"];
   
   const isLoveStory = !staticRoutes.includes(location.pathname);
 

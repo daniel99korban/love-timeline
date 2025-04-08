@@ -15,7 +15,6 @@ function slugify(text: string): string {
     .replace(/^-+|-+$/g, '');               // remove hífens do início e do fim
 }
 
-// Interface dos dados vindos do banco de dados
 interface LoveStoryData {
   title: string;
   message: string;
@@ -24,23 +23,52 @@ interface LoveStoryData {
 }
 
 // Função que simula uma chamada à API/banco de dados
-const fetchLoveStoryData = async (): Promise<LoveStoryData> => {
+const fetchLoveStoryData = async (): Promise<LoveStoryData[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve({
-        title: "Felipe & Thalia",
-        message: "É estranho como, mesmo nos dias comuns, meu coração faz festa só de pensar em você — como se o universo inteiro tivesse dado uma pausa só pra me lembrar da sorte que eu tenho por ter alguém como você: que me acalma sem dizer nada, que me entende sem que eu precise explicar, e que faz tudo ao meu redor ganhar cor, sentido e calor, como se amar você fosse, na verdade, a forma mais bonita de viver.",
-        relationshipDate: "2025-02-08",
-        photos: [
-          "/img_temp/felipe.jpg",
-          "/img_temp/felipe1.jpg",
-          "/img_temp/felipe2.jpg",
-          "/img_temp/felipe3.jpg",
-          "/img_temp/felipe4.jpg",
-          "/img_temp/felipe5.jpg",
-          "/img_temp/felipe6.jpg",
-        ],
-      });
+      resolve([
+        {
+          title: "Felipe & Thalia",
+          message:
+            "É estranho como, mesmo nos dias comuns, meu coração faz festa só de pensar em você — como se o universo tivesse dado uma pausa para me lembrar da sorte que tenho por te ter.",
+          relationshipDate: "2025-02-08",
+          photos: [
+            "/img_temp/felipe.jpg",
+            "/img_temp/felipe1.jpg",
+            "/img_temp/felipe2.jpg",
+            "/img_temp/felipe3.jpg",
+            "/img_temp/felipe4.jpg",
+            "/img_temp/felipe5.jpg",
+            "/img_temp/felipe6.jpg",
+          ],
+        },
+        {
+          title: "Davi & Isis",
+          message:
+            "Seu sorriso é meu lugar favorito no mundo — ali, entre as curvas da sua boca, moram todas as primaveras que preciso. Você chegou como uma revolução silenciosa, transformando cada rotina em algo sagrado, cada instante em uma memória que guardo no pulso, como um segredo que o coração insiste em contar. Não sei se o destino existe, mas sei que os seus olhos me fazem acreditar em milagres. Em você, encontrei a calma no meio da tempestade, a coragem de ser frágil, a beleza de amar sem medo do amanhã. Você é o 'para sempre' que eu nem sabia que procurava, escrito em letras miúdas nos detalhes que só nós entendemos. Te amo além das palavras, no lugar onde o tempo para e a vida respira.",
+          relationshipDate: "2021-01-16",
+          photos: [
+            "/img_temp2/davi.jpg",
+            "/img_temp2/davi1.webp",
+            "/img_temp2/davi2.jpg",
+            "/img_temp2/davi3.webp",
+            "/img_temp2/davi4.webp",
+            "/img_temp2/davi5.jpg",
+            "/img_temp2/davi6.jpg",
+          ],
+        },
+        // Adicione quantas linhas quiser aqui
+        {
+          title: "Ana & Pedro",
+          message:
+            "Juntos, transformamos pequenos instantes em eternas memórias recheadas de amor e cumplicidade.",
+          relationshipDate: "2023-11-20",
+          photos: [
+            "/img_temp/ana1.jpg",
+            "/img_temp/ana2.jpg",
+          ],
+        },
+      ]);
     }, 2000);
   });
 };
@@ -55,10 +83,11 @@ export const LoveStoryPage = () => {
   // Busca os dados ao montar o componente
   useEffect(() => {
     fetchLoveStoryData().then((response) => {
-      setData(response);
+      const matched = response.find((item) => slugify(item.title) === slug);
+      setData(matched || null);
       setLoading(false);
     });
-  }, []);
+  }, [slug]);
 
   // Após carregar os dados, verifica se o slug da URL corresponde ao slug gerado a partir do título
   useEffect(() => {
@@ -79,7 +108,7 @@ export const LoveStoryPage = () => {
     );
   }
 
-  if (!data) return null;
+  if (!data) return <div>História não encontrada.</div>;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-950 to-pink-950 p-8 text-white flex flex-col">

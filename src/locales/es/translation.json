@@ -91,5 +91,36 @@
     "copyright": "© 2025 MDK Studio. Todos los derechos reservados.",
     "privacy_policy": "Política de Privacidad",
     "terms_of_use": "Términos de Uso"
+  },
+  "privacy_policy": {
+    "title": "Política de Privacidad",
+    "intro": "Tu privacidad es importante para nosotros. Esta política de privacidad explica cómo recopilamos, usamos y protegemos tu información personal.",
+    "sections": [
+      {
+        "heading": "Información que Recopilamos",
+        "content": "Recopilamos la información que nos proporcionas directamente, como cuando creas un sitio, subes fotos o te pones en contacto con nosotros."
+      },
+      {
+        "heading": "Cómo Usamos Tu Información",
+        "content": "Utilizamos la información para proporcionar y mejorar nuestros servicios, personalizar tu experiencia y comunicarnos contigo."
+      },
+      {
+        "heading": "Seguridad de los Datos",
+        "content": "Implementamos medidas de seguridad adecuadas para proteger tus datos contra accesos no autorizados, alteraciones o divulgaciones."
+      },
+      {
+        "heading": "Compartir Información",
+        "content": "No compartimos tus datos personales con terceros, excepto cuando sea requerido por ley o con tu consentimiento explícito."
+      },
+      {
+        "heading": "Tus Derechos",
+        "content": "Tienes derecho a acceder, corregir o eliminar tus datos. Contáctanos para hacer una solicitud relacionada con tu información personal."
+      },
+      {
+        "heading": "Cambios en Esta Política",
+        "content": "Podemos actualizar esta política de privacidad ocasionalmente. Cualquier cambio será publicado en esta página."
+      }
+    ],
+    "update": "Última actualización: Abril de 2025"
   }
 }
