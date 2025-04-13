@@ -26,7 +26,7 @@ const routes = [
           element: <About />,
         },
         {
-          path: "/:slug",
+          path: "/:id/:slug",
           element: <LoveStoryPage />,
         },
         {

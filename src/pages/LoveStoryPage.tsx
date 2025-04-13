@@ -39,8 +39,6 @@ const fetchLoveStoryData = async (): Promise<LoveStoryData[]> => {
       relationshipDate: site.dataCouple,
       selectedSong: site.music_url || null,
     }));
-    
-
   } catch (error) {
     console.error("Erro ao buscar histórias de amor:", error);
     return [];
@@ -66,24 +64,27 @@ export const LoveStoryPage = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   // const [selectedSong] = useState<{ id: string } | null>(null);
-  const { slug } = useParams<{ slug: string }>();
+  // const { slug } = useParams<{ slug: string }>();
+  const { id, slug } = useParams<{ id: string; slug: string }>();
 
   useEffect(() => {
+    if (!id) return;
+
     fetchLoveStoryData().then((response) => {
-      const matched = response.find((item) => slugify(item.title) === slug);
+      const matched = response.find((item) => String(item.id) === id);
       setData(matched || null);
       setLoading(false);
     });
-  }, [slug]);
+  }, [id]);
 
   useEffect(() => {
-    if (data?.title && slug) {
+    if (data?.title && id && slug) {
       const generatedSlug = slugify(data.title);
       if (slug !== generatedSlug) {
-        navigate(`/${generatedSlug}`, { replace: true });
+        navigate(`/${id}/${generatedSlug}`, { replace: true });
       }
     }
-  }, [data, slug, navigate]);
+  }, [data, slug, id, navigate]);
 
   useEffect(() => {
     if (data?.id) {
@@ -91,7 +92,7 @@ export const LoveStoryPage = () => {
         setData((prevData) => 
           prevData ? { ...prevData, photos: photos } : prevData
         );
-        console.log("Imagens carregadas:", photos);
+        console.log("Id:", data.id);
       });
     }
   }, [data?.id]);
