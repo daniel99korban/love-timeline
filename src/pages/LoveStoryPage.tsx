@@ -1,76 +1,63 @@
-import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { PhotoIcon, SparklesIcon, HeartIcon } from '@heroicons/react/24/outline';
-import { useNavigate, useParams } from 'react-router-dom';
-import { RelationshipTimer } from '../components/RelationshipTimer';
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import {
+  PhotoIcon,
+  SparklesIcon,
+  HeartIcon,
+} from "@heroicons/react/24/outline";
+import { useNavigate, useParams } from "react-router-dom";
+import { RelationshipTimer } from "../components/RelationshipTimer";
+import { getWebsites, getImagesByWebsiteId } from "../api/websiteService";
 
-// Função para transformar o título em slug amigável para URLs
 function slugify(text: string): string {
   return text
+    .trimStart() // remove espaços do início
     .toLowerCase()
-    .normalize('NFD')                     // separa os acentos dos caracteres
-    .replace(/[\u0300-\u036f]/g, '')        // remove os acentos
-    .replace(/&/g, 'and')                  // substitui o "&" por "and"
-    .replace(/[^a-z0-9]+/g, '-')            // substitui caracteres inválidos por hífens
-    .replace(/^-+|-+$/g, '');               // remove hífens do início e do fim
+    .normalize("NFD") // separa os acentos dos caracteres
+    .replace(/[\u0300-\u036f]/g, "") // remove os acentos
+    .replace(/&/g, "and") // substitui o "&" por "and"
+    .replace(/[^a-z0-9]+/g, "-") // substitui caracteres inválidos por hífens
+    .replace(/^-+|-+$/g, ""); // remove hífens do início e do fim
 }
 
 interface LoveStoryData {
+  id: number;
   title: string;
   message: string;
   relationshipDate: string;
-  photos: string[];
+  selectedSong: any;
+  photos?: string[];
 }
 
-// Função que simula uma chamada à API/banco de dados
 const fetchLoveStoryData = async (): Promise<LoveStoryData[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        {
-          title: "Felipe & Thalia",
-          message:
-            "É estranho como, mesmo nos dias comuns, meu coração faz festa só de pensar em você — como se o universo tivesse dado uma pausa para me lembrar da sorte que tenho por te ter.",
-          relationshipDate: "2025-02-08",
-          photos: [
-            "/img_temp/felipe.jpg",
-            "/img_temp/felipe1.jpg",
-            "/img_temp/felipe2.jpg",
-            "/img_temp/felipe3.jpg",
-            "/img_temp/felipe4.jpg",
-            "/img_temp/felipe5.jpg",
-            "/img_temp/felipe6.jpg",
-          ],
-        },
-        {
-          title: "Davi & Isis",
-          message:
-            "Seu sorriso é meu lugar favorito no mundo — ali, entre as curvas da sua boca, moram todas as primaveras que preciso. Você chegou como uma revolução silenciosa, transformando cada rotina em algo sagrado, cada instante em uma memória que guardo no pulso, como um segredo que o coração insiste em contar. Não sei se o destino existe, mas sei que os seus olhos me fazem acreditar em milagres. Em você, encontrei a calma no meio da tempestade, a coragem de ser frágil, a beleza de amar sem medo do amanhã. Você é o 'para sempre' que eu nem sabia que procurava, escrito em letras miúdas nos detalhes que só nós entendemos. Te amo além das palavras, no lugar onde o tempo para e a vida respira.",
-          relationshipDate: "2021-01-16",
-          photos: [
-            "/img_temp2/davi.jpg",
-            "/img_temp2/davi1.webp",
-            "/img_temp2/davi2.jpg",
-            "/img_temp2/davi3.webp",
-            "/img_temp2/davi4.webp",
-            "/img_temp2/davi5.jpg",
-            "/img_temp2/davi6.jpg",
-          ],
-        },
-        // Adicione quantas linhas quiser aqui
-        {
-          title: "Ana & Pedro",
-          message:
-            "Juntos, transformamos pequenos instantes em eternas memórias recheadas de amor e cumplicidade.",
-          relationshipDate: "2023-11-20",
-          photos: [
-            "/img_temp/ana1.jpg",
-            "/img_temp/ana2.jpg",
-          ],
-        },
-      ]);
-    }, 2000);
-  });
+  try {
+    const websites = await getWebsites();
+    return websites.map((site: any) => ({
+      id: site.id,
+      title: site.title,
+      message: site.text,
+      relationshipDate: site.dataCouple,
+      selectedSong: site.music_url || null,
+    }));
+    
+
+  } catch (error) {
+    console.error("Erro ao buscar histórias de amor:", error);
+    return [];
+  }
+};
+
+const fetchPhotoData = async (websiteId: number): Promise<string[]> => {
+  try {
+    const images = await getImagesByWebsiteId(websiteId);
+    console.log("Imagens:", images);
+    return images
+      .map((image: any) => image.imgUrl?.trim())
+      .filter((url: string | undefined): url is string => !!url); // remove undefined/null
+  } catch (error) {
+    console.error("Erro ao buscar imagens:", error);
+    return [];
+  }
 };
 
 export const LoveStoryPage = () => {
@@ -78,9 +65,9 @@ export const LoveStoryPage = () => {
   const [data, setData] = useState<LoveStoryData | null>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  // const [selectedSong] = useState<{ id: string } | null>(null);
   const { slug } = useParams<{ slug: string }>();
 
-  // Busca os dados ao montar o componente
   useEffect(() => {
     fetchLoveStoryData().then((response) => {
       const matched = response.find((item) => slugify(item.title) === slug);
@@ -89,21 +76,30 @@ export const LoveStoryPage = () => {
     });
   }, [slug]);
 
-  // Após carregar os dados, verifica se o slug da URL corresponde ao slug gerado a partir do título
   useEffect(() => {
     if (data?.title && slug) {
       const generatedSlug = slugify(data.title);
       if (slug !== generatedSlug) {
-        // Redireciona para a rota correta se necessário
         navigate(`/${generatedSlug}`, { replace: true });
       }
     }
   }, [data, slug, navigate]);
 
+  useEffect(() => {
+    if (data?.id) {
+      fetchPhotoData(data.id).then((photos) => {
+        setData((prevData) => 
+          prevData ? { ...prevData, photos: photos } : prevData
+        );
+        console.log("Imagens carregadas:", photos);
+      });
+    }
+  }, [data?.id]);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-950 to-pink-950 p-8 flex items-center justify-center">
-        <p className="text-white text-xl">{t('form.loading')}</p>
+        <p className="text-white text-xl">{t("form.loading")}</p>
       </div>
     );
   }
@@ -115,7 +111,7 @@ export const LoveStoryPage = () => {
       {/* Cabeçalho */}
       <header className="text-center mb-8">
         <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent">
-          {data.title || t('form.default_title')}
+          {data.title || t("form.default_title")}
         </h1>
         <SparklesIcon className="mx-auto h-8 w-8 text-pink-400/50 mt-2 animate-pulse" />
       </header>
@@ -127,7 +123,7 @@ export const LoveStoryPage = () => {
         ) : (
           <div className="text-purple-300/50 flex items-center justify-center space-x-2">
             <HeartIcon className="w-6 h-6" />
-            <span>{t('form.select_date')}</span>
+            <span>{t("form.select_date")}</span>
           </div>
         )}
       </section>
@@ -135,7 +131,7 @@ export const LoveStoryPage = () => {
       {/* Seção da Foto de Capa */}
       <section className="mb-12 flex justify-center">
         <div className="relative aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-600/20 transform hover:scale-105 transition-all duration-500">
-          {data.photos[0] ? (
+          {data.photos?.[0] ? (
             <img
               src={data.photos[0]}
               alt="Capa"
@@ -161,7 +157,7 @@ export const LoveStoryPage = () => {
               <div className="text-center space-y-2">
                 <span className="text-purple-400/50 block">✍️</span>
                 <p className="text-purple-400/50 italic text-sm">
-                  {t('form.default_message')}
+                  {t("form.default_message")}
                 </p>
               </div>
             </div>
@@ -174,9 +170,9 @@ export const LoveStoryPage = () => {
 
       {/* Seção da Galeria de Fotos */}
       <section className="grid grid-cols-3 gap-4 mx-auto max-w-4xl">
-        {data.photos.slice(1).map((url, index) => (
-          <div 
-            key={index+1}
+        {data.photos?.slice(1).map((url, index) => (
+          <div
+            key={index + 1}
             className="relative aspect-square rounded-lg overflow-hidden transform transition-all 
                       hover:scale-105 hover:z-10 hover:shadow-xl group"
           >
@@ -188,7 +184,7 @@ export const LoveStoryPage = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-purple-900/40 via-transparent to-transparent" />
           </div>
         ))}
-        {[...Array(7 - data.photos.length)].map((_, i) => (
+        {[...Array(7 - (data.photos?.length ?? 0))].map((_, i) => (
           <div
             key={`empty-${i}`}
             className="aspect-square rounded-lg border-2 border-dashed border-purple-500/30 bg-purple-900/10 
@@ -202,20 +198,18 @@ export const LoveStoryPage = () => {
       </section>
 
       {/* Seção do Player de Música do Spotify */}
-      <section className="mt-8 mx-auto max-w-4xl">
-        <div className="flex justify-center">
+      {data.selectedSong && (
+        <div className="mt-6 border border-purple-500/20 rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-purple-800/40 to-pink-800/30 backdrop-blur-md">
           <iframe
-            src="https://open.spotify.com/embed/track/1DLKuppSYytOuxhtI6KBGu?autoplay=1"
-            width="300"
-            height="380"
-            frameBorder="0"
-            allowTransparency={true}
-            allow="autoplay; encrypted-media"
-            title="Spotify Player - Aliança"
+            src={`${data.selectedSong}?utm_source=generator&autoplay=1`}
+            width="100%"
+            height="80"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            className="rounded-b-xl"
           ></iframe>
         </div>
-      </section>
-
+      )}
     </div>
   );
 };

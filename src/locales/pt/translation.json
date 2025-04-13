@@ -73,7 +73,11 @@
     "select_date": "Selecionar uma data",
     "default_title": "Nossa História de Amor",
     "default_message": "Sua mensagem especial aparecerá aqui...",
-    "loading": "Carregando..."
+    "loading": "Carregando...",
+    "spotify_song_label": "Música Spotify",
+    "spotify_song_placeholder": "Digite o nome da música",
+    "spotify_song_by": "por",
+    "spotify_song_selected": "Selecionado"
   },
   "about": {
     "title": "Sobre Nós",

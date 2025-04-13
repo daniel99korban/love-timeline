@@ -73,7 +73,11 @@
     "select_date": "Select a date",
     "default_title": "Our Love Story",
     "default_message": "Your special message will appear here...",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "spotify_song_label": "Spotify Song",
+    "spotify_song_placeholder": "Type the song name",
+    "spotify_song_by": "by",
+    "spotify_song_selected": "Selected"
   },
   "about": {
     "title": "About Us",
