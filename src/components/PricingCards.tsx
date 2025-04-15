@@ -30,7 +30,6 @@ export const PricingSection = () => {
   const [currency, setCurrency] = useState<Currency>('USD');
   const [userCanChoose, setUserCanChoose] = useState(false);
 
-  // Usando React Query para buscar e cachear os dados de moeda
   const { data: apiCurrency, error } = useQuery({
     queryKey: ['currencyData'],
     queryFn: fetchCurrency,
@@ -48,7 +47,6 @@ export const PricingSection = () => {
         setUserCanChoose(true);
       }
     } else if (error) {
-      // Em caso de erro, permite a escolha manual
       setCurrency('USD');
       setUserCanChoose(true);
     }
@@ -62,20 +60,22 @@ export const PricingSection = () => {
   const symbol = currencySymbols[currency];
 
   return (
-    <section className="py-20 px-6 bg-gray-950 text-center">
-      <h2 className="text-4xl font-bold text-white mb-4">{t('home.pricing.title')}</h2>
-      <p className="text-gray-400 mb-10 text-lg">{t('home.pricing.subtitle')}</p>
+    <section className="py-24 px-6 bg-gray-900">
+      <h2 className="text-4xl font-bold text-center text-white mb-6">{t('home.pricing.title')}</h2>
+      <p className="text-center text-gray-400 mb-12 text-xl max-w-2xl mx-auto">
+        {t('home.pricing.subtitle')}
+      </p>
 
       {userCanChoose && (
-        <div className="mb-10">
-          <label htmlFor="currency" className="mr-2 font-medium text-gray-300">
+        <div className="mb-10 flex justify-center">
+          <label htmlFor="currency" className="mr-3 font-medium text-gray-300">
             {t('home.pricing.select_currency')}
           </label>
           <select
             id="currency"
             value={currency}
             onChange={(e) => setCurrency(e.target.value as Currency)}
-            className="bg-gray-800 text-white border border-gray-600 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="bg-gray-800 text-white border border-gray-600 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             {supportedCurrencies.map((cur) => (
               <option key={cur} value={cur}>
@@ -86,36 +86,36 @@ export const PricingSection = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-5xl mx-auto">
         {/* Plano Mensal */}
-        <div className="bg-gray-900 p-8 rounded-2xl shadow-xl border border-gray-800 hover:scale-105 transition-transform duration-300">
-          <h3 className="text-2xl font-bold text-white mb-2">{t('home.pricing.monthly')}</h3>
-          <p className="text-3xl font-semibold text-indigo-400 mb-6">
+        <div className="bg-gray-800 p-10 rounded-2xl shadow-2xl border border-gray-700 transition-transform duration-300 hover:scale-105 hover:shadow-indigo-700/30">
+          <h3 className="text-3xl font-bold text-white mb-3">{t('home.pricing.monthly')}</h3>
+          <p className="text-4xl font-semibold text-indigo-400 mb-6">
             {symbol} {month}
-            <span className="text-base text-gray-400"> / {t('home.pricing.per_month')}</span>
+            <span className="text-lg text-gray-400"> / {t('home.pricing.per_month')}</span>
           </p>
-          <ul className="text-left space-y-3 text-gray-300">
+          <ul className="space-y-4 text-gray-300 text-lg">
             {pricingFeatures.map((feature, idx) => (
-              <li key={idx} className="flex items-start gap-2">
+              <li key={idx} className="flex items-center gap-3">
                 <span className="text-indigo-400">✓</span> {feature}
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Plano Anual */}
-        <div className="relative bg-indigo-950 p-8 rounded-2xl shadow-2xl border-2 border-indigo-500 hover:scale-105 transition-transform duration-300">
-          <span className="absolute -top-3 right-4 bg-indigo-600 text-white text-sm font-semibold px-3 py-1 rounded-full shadow-md">
+        {/* Plano Anual com Destaque */}
+        <div className="relative bg-indigo-950 p-10 rounded-2xl shadow-3xl border-2 border-indigo-500 transition-transform duration-300 hover:scale-105">
+          <span className="absolute -top-4 right-6 bg-indigo-600 text-white text-sm font-semibold px-3 py-1 rounded-full shadow-md">
             {t('home.pricing.best_value')}
           </span>
-          <h3 className="text-2xl font-bold text-white mb-2">{t('home.pricing.yearly')}</h3>
-          <p className="text-3xl font-semibold text-indigo-300 mb-6">
+          <h3 className="text-3xl font-bold text-white mb-3">{t('home.pricing.yearly')}</h3>
+          <p className="text-4xl font-semibold text-indigo-300 mb-6">
             {symbol} {year}
-            <span className="text-base text-gray-400"> / {t('home.pricing.per_year')}</span>
+            <span className="text-lg text-gray-400"> / {t('home.pricing.per_year')}</span>
           </p>
-          <ul className="text-left space-y-3 text-gray-300">
+          <ul className="space-y-4 text-gray-300 text-lg">
             {pricingFeatures.map((feature, idx) => (
-              <li key={idx} className="flex items-start gap-2">
+              <li key={idx} className="flex items-center gap-3">
                 <span className="text-indigo-400">✓</span> {feature}
               </li>
             ))}

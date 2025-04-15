@@ -41,7 +41,7 @@ export const LanguageDropdown = () => {
   const currentLang = languages.find(lang => lang.code === i18n.language) || languages[0];
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative z-9" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center space-x-2 bg-gray-900 p-2 rounded text-white"
