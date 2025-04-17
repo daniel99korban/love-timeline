@@ -5,7 +5,6 @@ import api from "../api/axiosInstance";
 interface SpotifySearchDropdownProps {
   selectedSong: any;
   setSelectedSong: (song: any) => void;
-  spotifyToken: string;
 }
 
 export const SpotifySearchDropdown = ({

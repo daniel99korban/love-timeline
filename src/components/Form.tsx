@@ -12,10 +12,9 @@ export const Form = () => {
   const [message, setMessage] = useState<string>("");
   const [relationshipDate, setRelationshipDate] = useState<string>("");
   const [photos, setPhotos] = useState<File[]>([]);
+  const maxLength = 200;
 
   const [selectedSong, setSelectedSong] = useState<any>(null);
-  const spotifyToken =
-    "BQAGVOp-Q15xM9FP93t9WDbzYU4W0ESLIHSHsJDkmMRogWTEVtjsDgr7BrCW648dXmhN3Fwz5qNotJJIIXqqD3VSFwS7HP3359oqluel36NKWsxJTuc-7aL-_uic4nYcaLZxfZvfsk4";
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -72,10 +71,7 @@ export const Form = () => {
 
       {/* Formulário */}
       <div className="bg-gray-800 border border-gray-700 rounded-xl shadow-2xl px-8 pt-6 pb-8 w-full max-w-md flex-shrink-0">
-        <h2
-          className="text-3xl font-bold mb-6 text-center bg-gradient-to-r 
-                     from-blue-400 to-cyan-400 bg-clip-text text-transparent"
-        >
+        <h2 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
           {t("form.create_site")}
         </h2>
         <form onSubmit={handleSubmit}>
@@ -92,9 +88,7 @@ export const Form = () => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder={t("form.enter_title")}
-              className="w-full py-2 px-4 rounded-lg bg-gray-700 border border-gray-600 
-                         text-gray-100 placeholder-gray-400 focus:outline-none focus:border-blue-400 
-                         focus:ring-2 focus:ring-blue-500/50 transition-all"
+              className="w-full py-2 px-4 rounded-lg bg-gray-700 border border-gray-600 text-gray-100 placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500/50 transition-all"
               required
             />
           </div>
@@ -111,12 +105,14 @@ export const Form = () => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder={t("form.enter_message")}
-              className="w-full py-2 px-4 rounded-lg bg-gray-700 border border-gray-600 
-                         text-gray-100 placeholder-gray-400 focus:outline-none focus:border-blue-400 
-                         focus:ring-2 focus:ring-blue-500/50 transition-all"
+              className="w-full py-2 px-4 rounded-lg bg-gray-700 border border-gray-600 text-gray-100 placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500/50 transition-all"
               rows={3}
               required
+              maxLength={200}
             ></textarea>
+            <p className="text-xs text-gray-400 mt-1 text-right">
+              {message.length}/{maxLength}
+            </p>
           </div>
 
           <div className="mb-5">
@@ -131,9 +127,7 @@ export const Form = () => {
               type="date"
               value={relationshipDate}
               onChange={(e) => setRelationshipDate(e.target.value)}
-              className="w-full py-2 px-4 rounded-lg bg-gray-700 border border-gray-600 text-gray-100
-                         focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500/50 transition-all
-                         [&::-webkit-calendar-picker-indicator]:invert-[0.8]"
+              className="w-full py-2 px-4 rounded-lg bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500/50 transition-all [&::-webkit-calendar-picker-indicator]:invert-[0.8]"
               required
             />
           </div>
@@ -142,7 +136,6 @@ export const Form = () => {
           <SpotifySearchDropdown
             selectedSong={selectedSong}
             setSelectedSong={setSelectedSong}
-            spotifyToken={spotifyToken}
           />
 
           <div className="mb-6">
@@ -152,10 +145,7 @@ export const Form = () => {
           <div className="flex items-center justify-center">
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600
-                         text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-[1.02]
-                         focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-800
-                         shadow-md hover:shadow-lg active:scale-95"
+              className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-800 shadow-md hover:shadow-lg active:scale-95"
             >
               {t("form.submit")}
             </button>

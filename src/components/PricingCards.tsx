@@ -87,7 +87,6 @@ export const PricingSection = () => {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-5xl mx-auto">
-        {/* Plano Mensal */}
         <div className="bg-gray-800 p-10 rounded-2xl shadow-2xl border border-gray-700 transition-transform duration-300 hover:scale-105 hover:shadow-indigo-700/30">
           <h3 className="text-3xl font-bold text-white mb-3">{t('home.pricing.monthly')}</h3>
           <p className="text-4xl font-semibold text-indigo-400 mb-6">

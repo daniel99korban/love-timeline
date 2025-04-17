@@ -24,7 +24,7 @@
     "pricing": {
       "title": "Planes y Precios",
       "subtitle": "Elige el plan que mejor se adapte a ti",
-      "monthly": "Plan Mensual",
+      "monthly": "Plan trimestral",
       "yearly": "Plan Anual",
       "select_currency": "Selecciona la moneda",
       "features": [
