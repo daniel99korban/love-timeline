@@ -11,7 +11,7 @@ interface ImageUploaderProps {
 export const ImageUploader = ({ photos, setPhotos, t }: ImageUploaderProps) => {
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      if (photos.length + acceptedFiles.length > 12) {
+      if (photos.length + acceptedFiles.length > 6) {
         alert(t("max_photos"));
         return;
       }
@@ -33,7 +33,7 @@ export const ImageUploader = ({ photos, setPhotos, t }: ImageUploaderProps) => {
   return (
     <>
       <label className="block text-gray-300 text-sm font-semibold mb-2">
-        {t("form.upload_photos")} (max. 12)
+        {t("form.upload_photos")} (max. 6)
       </label>
 
       <div

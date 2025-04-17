@@ -17,13 +17,15 @@ export const Form = () => {
   const spotifyToken =
     "BQAGVOp-Q15xM9FP93t9WDbzYU4W0ESLIHSHsJDkmMRogWTEVtjsDgr7BrCW648dXmhN3Fwz5qNotJJIIXqqD3VSFwS7HP3359oqluel36NKWsxJTuc-7aL-_uic4nYcaLZxfZvfsk4";
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const selectedSongUrl = selectedSong
     ? `https://open.spotify.com/embed/track/${selectedSong.id}`
     : null;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setIsLoading(true);
     try {
       const plan = 1;
 
@@ -49,11 +51,25 @@ export const Form = () => {
     } catch (error) {
       console.error("Erro ao criar website ou enviar imagens:", error);
       alert("Erro ao enviar os dados!");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row gap-8 items-start justify-center bg-gray-950 p-8">
+    <div className="relative min-h-screen flex flex-col md:flex-row gap-8 items-start justify-center bg-gray-950 p-8">
+      {/* Modal de carregamento */}
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl flex flex-col items-center gap-4">
+            <div className="w-12 h-12 border-4 border-gray-300 dark:border-gray-600 border-t-blue-500 rounded-full animate-spin"></div>
+            <p className="text-gray-700 dark:text-gray-200 font-semibold">
+              {t("form.loading") || "Carregando..."}
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Formulário */}
       <div className="bg-gray-800 border border-gray-700 rounded-xl shadow-2xl px-8 pt-6 pb-8 w-full max-w-md flex-shrink-0">
         <h2

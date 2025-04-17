@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import  api  from "../api/axiosInstance";
+import api from "../api/axiosInstance";
 
 interface SpotifySearchDropdownProps {
   selectedSong: any;
@@ -15,7 +15,8 @@ export const SpotifySearchDropdown = ({
   const { t } = useTranslation();
   const [songQuery, setSongQuery] = useState<string>("");
   const [songSuggestions, setSongSuggestions] = useState<any[]>([]);
-  
+  const [isDropdownVisible, setDropdownVisible] = useState<boolean>(false);
+
   // Função para buscar músicas no Spotify
   async function searchSpotifyTracks(query: string) {
     try {
@@ -26,7 +27,7 @@ export const SpotifySearchDropdown = ({
           limit: 5,
         },
       });
-      
+
       const data = await response.data;
       if (data) {
         setSongSuggestions(data);
@@ -38,7 +39,7 @@ export const SpotifySearchDropdown = ({
 
   // Implementação de debounce para aguardar 500ms após a última digitação
   useEffect(() => {
-    if (songQuery.length < 3) {
+    if (!isDropdownVisible || songQuery.length < 3) {
       setSongSuggestions([]);
       return;
     }
@@ -46,7 +47,7 @@ export const SpotifySearchDropdown = ({
       searchSpotifyTracks(songQuery);
     }, 500);
     return () => clearTimeout(timer);
-  }, [songQuery]);
+  }, [songQuery, isDropdownVisible]);
 
   // Função para selecionar uma música da lista
   const handleSongSelect = (track: any) => {
@@ -55,6 +56,7 @@ export const SpotifySearchDropdown = ({
       `${track.name} - ${track.artists.map((a: any) => a.name).join(", ")}`
     );
     setSongSuggestions([]);
+    setDropdownVisible(false);
   };
 
   return (
@@ -72,11 +74,12 @@ export const SpotifySearchDropdown = ({
         onChange={(e) => {
           setSongQuery(e.target.value);
           setSelectedSong(null);
+          setDropdownVisible(true);
         }}
         placeholder={t("form.spotify_song_placeholder")}
         className="w-full py-2 px-4 rounded-lg bg-gray-700 border border-gray-600 text-gray-100 placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500/50 transition-all"
       />
-      {songSuggestions.length > 0 && (
+      {isDropdownVisible && songSuggestions.length > 0 && (
         <ul className="bg-gray-800 border border-gray-600 mt-1 rounded-lg">
           {songSuggestions.map((track) => {
             const albumImage =
@@ -96,7 +99,7 @@ export const SpotifySearchDropdown = ({
                   />
                 )}
                 <span className="text-gray-100">
-                  {track.name} {t("form.spotify_song_by")}{" "}
+                  {track.name} {t("form.spotify_song_by")} {" "}
                   {track.artists.map((artist: any) => artist.name).join(", ")}
                 </span>
               </li>
@@ -106,7 +109,7 @@ export const SpotifySearchDropdown = ({
       )}
       {selectedSong && (
         <p className="text-green-400 mt-2">
-          {t("form.spotify_song_selected")}: {selectedSong.name} -{" "}
+          {t("form.spotify_song_selected")} : {selectedSong.name} - {" "}
           {selectedSong.artists.map((a: any) => a.name).join(", ")}
         </p>
       )}

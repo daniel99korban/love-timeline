@@ -103,7 +103,7 @@ export const LoveStoryPreview = ({
             <div className="absolute inset-0 bg-gradient-to-b from-purple-900/40 via-transparent to-transparent" />
           </div>
         ))}
-        {[...Array(12 - photos.length)].map((_, i) => (
+        {[...Array(6 - photos.length)].map((_, i) => (
           <div
             key={`empty-${i}`}
             className="aspect-square rounded-lg border-2 border-dashed border-purple-500/30 bg-purple-900/10 
