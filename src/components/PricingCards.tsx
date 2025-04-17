@@ -43,11 +43,11 @@ export const PricingSection = () => {
         setCurrency(apiCurrency as Currency);
         setUserCanChoose(false);
       } else {
-        setCurrency('USD');
+        setCurrency('BRL');
         setUserCanChoose(true);
       }
     } else if (error) {
-      setCurrency('USD');
+      setCurrency('BRL');
       setUserCanChoose(true);
     }
   }, [apiCurrency, error]);
