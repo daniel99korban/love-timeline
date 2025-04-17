@@ -126,5 +126,38 @@
       }
     ],
     "update": "Última actualización: Abril de 2025"
+  },
+  "terms": {
+    "title": "Términos de Uso",
+    "sections": {
+      "acceptance": {
+        "title": "1. Aceptación de los Términos",
+        "content": "Al acceder y utilizar este sitio web, usted acepta cumplir y estar sujeto a estos Términos de Uso. Si no está de acuerdo con alguno de estos términos, por favor, no utilice el sitio web."
+      },
+      "modifications": {
+        "title": "2. Modificaciones de los Términos",
+        "content": "Nos reservamos el derecho de modificar estos Términos de Uso en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación en el sitio web. Es responsabilidad del usuario revisar periódicamente los términos."
+      },
+      "usage": {
+        "title": "3. Uso del Sitio Web",
+        "content": "Usted se compromete a utilizar el sitio web solo para fines legales y de manera que no infrinja los derechos de terceros ni restrinja el uso y disfrute del sitio web por parte de otros usuarios."
+      },
+      "intellectual_property": {
+        "title": "4. Propiedad Intelectual",
+        "content": "Todo el contenido de este sitio web, incluidos textos, imágenes, logotipos y gráficos, es de nuestra propiedad o está licenciado para nosotros y está protegido por leyes de derechos de autor y otras leyes de propiedad intelectual."
+      },
+      "liability": {
+        "title": "5. Limitación de Responsabilidad",
+        "content": "No somos responsables de ningún daño directo, indirecto, incidental o consecuente que resulte del uso o la imposibilidad de uso del sitio web."
+      },
+      "law": {
+        "title": "6. Ley Aplicable",
+        "content": "Estos Términos de Uso se regirán e interpretarán de acuerdo con las leyes del país en el que operamos, sin tener en cuenta los principios de conflicto de leyes."
+      },
+      "contact": {
+        "title": "7. Contacto",
+        "content": "Si tiene preguntas o inquietudes sobre estos Términos de Uso, contáctenos en: contacto@ejemplo.com."
+      }
+    }
   }
 }
