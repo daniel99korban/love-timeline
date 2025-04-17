@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import  api  from "../api/axiosInstance";
 
 interface SpotifySearchDropdownProps {
   selectedSong: any;
@@ -10,7 +11,6 @@ interface SpotifySearchDropdownProps {
 export const SpotifySearchDropdown = ({
   selectedSong,
   setSelectedSong,
-  spotifyToken,
 }: SpotifySearchDropdownProps) => {
   const { t } = useTranslation();
   const [songQuery, setSongQuery] = useState<string>("");
@@ -19,17 +19,17 @@ export const SpotifySearchDropdown = ({
   // Função para buscar músicas no Spotify
   async function searchSpotifyTracks(query: string) {
     try {
-      const response = await fetch(
-        `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=5`,
-        {
-          headers: {
-            Authorization: `Bearer ${spotifyToken}`,
-          },
-        }
-      );
-      const data = await response.json();
-      if (data.tracks) {
-        setSongSuggestions(data.tracks.items);
+      const response = await api.get('/websites/search-music', {
+        params: {
+          search: query,
+          type: 'track',
+          limit: 5,
+        },
+      });
+      
+      const data = await response.data;
+      if (data) {
+        setSongSuggestions(data);
       }
     } catch (error) {
       console.error("Erro na busca de músicas", error);
