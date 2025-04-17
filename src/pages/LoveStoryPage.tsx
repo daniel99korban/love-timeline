@@ -89,7 +89,7 @@ export const LoveStoryPage = () => {
   useEffect(() => {
     if (data?.id) {
       fetchPhotoData(data.id).then((photos) => {
-        setData((prevData) => 
+        setData((prevData) =>
           prevData ? { ...prevData, photos: photos } : prevData
         );
         console.log("Id:", data.id);
@@ -111,7 +111,7 @@ export const LoveStoryPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-purple-950 to-pink-950 p-8 text-white flex flex-col">
       {/* Cabeçalho */}
       <header className="text-center mb-8">
-        <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent">
+        <h1 className="truncate text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold bg-gradient-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent">
           {data.title || t("form.default_title")}
         </h1>
         <SparklesIcon className="mx-auto h-8 w-8 text-pink-400/50 mt-2 animate-pulse" />
@@ -130,8 +130,10 @@ export const LoveStoryPage = () => {
       </section>
 
       {/* Seção da Foto de Capa */}
-      <section className="mb-12 flex justify-center">
-        <div className="relative aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-600/20 transform hover:scale-105 transition-all duration-500">
+      <section className="mb-12 flex justify-center px-4">
+        <div
+          className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-600/20 transform hover:scale-105 transition-all duration-500"
+        >
           {data.photos?.[0] ? (
             <img
               src={data.photos[0]}
@@ -170,37 +172,27 @@ export const LoveStoryPage = () => {
       </section>
 
       {/* Seção da Galeria de Fotos */}
-      <section className="grid grid-cols-3 gap-4 mx-auto max-w-4xl">
-        {data.photos?.slice(1).map((url, index) => (
-          <div
-            key={index + 1}
-            className="relative aspect-square rounded-lg overflow-hidden transform transition-all 
-                      hover:scale-105 hover:z-10 hover:shadow-xl group"
-          >
-            <img
-              src={url}
-              alt={`Preview ${index + 1}`}
-              className="w-full h-full object-cover transform group-hover:rotate-1 transition-all duration-300"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-purple-900/40 via-transparent to-transparent" />
-          </div>
-        ))}
-        {[...Array(7 - (data.photos?.length ?? 0))].map((_, i) => (
-          <div
-            key={`empty-${i}`}
-            className="aspect-square rounded-lg border-2 border-dashed border-purple-500/30 bg-purple-900/10 
-                      flex items-center justify-center hover:bg-purple-500/10 transition-colors"
-          >
-            <div className="text-purple-400/30 animate-pulse">
-              <PhotoIcon className="w-10 h-10" />
+      {data.photos && data.photos.length > 0 && (
+        <section className="grid grid-cols-3 gap-4 mx-auto max-w-4xl">
+          {data.photos.map((url, index) => (
+            <div
+              key={index}
+              className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-[3/4] rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:z-10 hover:shadow-xl group"
+            >
+              <img
+                src={url}
+                alt={`Preview ${index + 1}`}
+                className="w-full h-full object-cover transform group-hover:rotate-1 transition-all duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-purple-900/40 via-transparent to-transparent" />
             </div>
-          </div>
-        ))}
-      </section>
+          ))}
+        </section>
+      )}
 
       {/* Seção do Player de Música do Spotify */}
       {data.selectedSong && (
-        <div className="mt-6 border border-purple-500/20 rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-purple-800/40 to-pink-800/30 backdrop-blur-md">
+        <div className="w-full max-w-3xl mx-auto mt-6 border border-purple-500/20 rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-purple-800/40 to-pink-800/30 backdrop-blur-md">
           <iframe
             src={`${data.selectedSong}?utm_source=generator&autoplay=1`}
             width="100%"

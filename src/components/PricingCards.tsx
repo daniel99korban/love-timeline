@@ -27,7 +27,7 @@ const fetchCurrency = async (): Promise<string> => {
 
 export const PricingSection = () => {
   const { t } = useTranslation();
-  const [currency, setCurrency] = useState<Currency>('USD');
+  const [currency, setCurrency] = useState<Currency>('BRL');
   const [userCanChoose, setUserCanChoose] = useState(false);
 
   const { data: apiCurrency, error } = useQuery({

@@ -7,9 +7,9 @@ export const Footer = () => {
   return (
     <footer className="bg-gray-950 border-t border-gray-800 text-gray-400 py-6">
       <div className="max-w-screen-xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
-        <p className="text-sm text-center sm:text-left">
+        <a className="text-sm text-center sm:text-left" href="https://mdkstudio.com.br/">
           &copy; {new Date().getFullYear()} {t("footer.copyright")}
-        </p>
+        </a>
         <div className="flex space-x-6">
           <Link
             to="/privacy-policy"

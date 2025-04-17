@@ -33,7 +33,7 @@ export const ImageUploader = ({ photos, setPhotos, t }: ImageUploaderProps) => {
   return (
     <>
       <label className="block text-gray-300 text-sm font-semibold mb-2">
-        {t("form.upload_photos")} (max. 6)
+        {t("form.upload_photos")} (max. 7)
       </label>
 
       <div
