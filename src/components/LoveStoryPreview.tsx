@@ -88,33 +88,23 @@ export const LoveStoryPreview = ({
       </div>
 
       {/* Grid de Fotos */}
-      <div className="grid grid-cols-3 gap-2">
-        {photos.slice(1).map((file, index) => (
-          <div
-            key={index + 1}
-            className="relative aspect-square rounded-lg overflow-hidden transform transition-all 
-                      hover:scale-105 hover:z-10 hover:shadow-xl group"
-          >
-            <img
-              src={URL.createObjectURL(file)}
-              alt={`Preview ${index + 1}`}
-              className="w-full h-full object-cover transform group-hover:rotate-1 transition-all duration-300"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-purple-900/40 via-transparent to-transparent" />
-          </div>
-        ))}
-        {[...Array(6 - photos.length)].map((_, i) => (
-          <div
-            key={`empty-${i}`}
-            className="aspect-square rounded-lg border-2 border-dashed border-purple-500/30 bg-purple-900/10 
-                      flex items-center justify-center hover:bg-purple-500/10 transition-colors"
-          >
-            <div className="text-purple-400/30 animate-pulse">
-              <PhotoIcon className="w-8 h-8" />
+      {photos && photos.length > 1 && (
+        <section className="grid grid-cols-3 gap-4 mx-auto max-w-4xl">
+          {photos.slice(1).map((url, index) => (
+            <div
+              key={index}
+              className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-[3/4] rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:z-10 hover:shadow-xl group"
+            >
+              <img
+                src={URL.createObjectURL(url)}
+                alt={`Preview ${index + 1}`}
+                className="w-full h-full object-cover transform group-hover:rotate-1 transition-all duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-purple-900/40 via-transparent to-transparent" />
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </section>
+      )}
 
       {/* Spotify Player */}
       {selectedSong && (

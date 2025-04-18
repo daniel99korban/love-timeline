@@ -172,9 +172,9 @@ export const LoveStoryPage = () => {
       </section>
 
       {/* Seção da Galeria de Fotos */}
-      {data.photos && data.photos.length > 0 && (
+      {data.photos && data.photos.length > 1 && (
         <section className="grid grid-cols-3 gap-4 mx-auto max-w-4xl">
-          {data.photos.map((url, index) => (
+          {data.photos.slice(1).map((url, index) => (
             <div
               key={index}
               className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-[3/4] rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:z-10 hover:shadow-xl group"
