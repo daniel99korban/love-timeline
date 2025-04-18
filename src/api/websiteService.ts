@@ -31,7 +31,12 @@ export const createWebsite = async (websiteData: {
   music_url: string | null;
 }) => {
   try {
-    const response = await api.post("/websites/", websiteData);
+    const response = await api.post("/websites/", websiteData,{
+      params: {
+        language: "EN",
+        qrModel: "MINIMALIST",
+      }
+  });
     return response.data;
   } catch (error) {
     console.error("Erro ao criar website:", error);
