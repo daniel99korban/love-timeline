@@ -27,13 +27,13 @@ export const createWebsite = async (websiteData: {
   text: string;
   plan: number;
   dataCouple: string;
-  // imgs: string[];
   music_url: string | null;
+  language: string;
 }) => {
   try {
     const response = await api.post("/websites/", websiteData,{
       params: {
-        language: "EN",
+        language: websiteData.language,
         qrModel: "MINIMALIST",
       }
   });

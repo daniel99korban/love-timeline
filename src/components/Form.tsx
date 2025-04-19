@@ -7,16 +7,16 @@ import { SpotifySearchDropdown } from "./SpotifySearchDropdown";
 import { handleFileUpload } from "../api/websiteService";
 
 export const Form = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [title, setTitle] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [relationshipDate, setRelationshipDate] = useState<string>("");
   const [photos, setPhotos] = useState<File[]>([]);
   const maxLength = 200;
-
   const [selectedSong, setSelectedSong] = useState<any>(null);
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showSuccess, setShowSuccess] = useState<boolean>(false);
+  const [showError, setShowError] = useState(false);
 
   const selectedSongUrl = selectedSong
     ? `https://open.spotify.com/embed/track/${selectedSong.id}`
@@ -28,12 +28,15 @@ export const Form = () => {
     try {
       const plan = 1;
 
+      const language = i18n.language;
+
       const payload = {
         title,
         text: message,
         plan,
         dataCouple: relationshipDate,
         music_url: selectedSongUrl,
+        language,
       };
 
       const createdWebsite = await createWebsite(payload);
@@ -44,31 +47,23 @@ export const Form = () => {
         handleFileUpload(file, websiteId)
       );
       await Promise.all(uploadPromises);
+      setShowSuccess(true);
 
       console.log("Website e imagens enviados com sucesso!");
-      alert(t("form_submitted"));
     } catch (error) {
       console.error("Erro ao criar website ou enviar imagens:", error);
-      alert("Erro ao enviar os dados!");
+      setShowError(true);
     } finally {
+      setTimeout(() => {
+        setShowSuccess(false);
+        setShowError(false);
+      }, 4000);
       setIsLoading(false);
     }
   };
 
   return (
     <div className="relative min-h-screen flex flex-col md:flex-row gap-8 items-start justify-center bg-gray-950 p-8">
-      {/* Modal de carregamento */}
-      {isLoading && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl flex flex-col items-center gap-4">
-            <div className="w-12 h-12 border-4 border-gray-300 dark:border-gray-600 border-t-blue-500 rounded-full animate-spin"></div>
-            <p className="text-gray-700 dark:text-gray-200 font-semibold">
-              {t("form.loading") || "Carregando..."}
-            </p>
-          </div>
-        </div>
-      )}
-
       {/* Formulário */}
       <div className="bg-gray-800 border border-gray-700 rounded-xl shadow-2xl px-8 pt-6 pb-8 w-full max-w-md flex-shrink-0">
         <h2 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
@@ -142,15 +137,57 @@ export const Form = () => {
             <ImageUploader photos={photos} setPhotos={setPhotos} t={t} />
           </div>
 
-          <div className="flex items-center justify-center">
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-800 shadow-md hover:shadow-lg active:scale-95"
-            >
-              {t("form.submit")}
-            </button>
-          </div>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={`w-full mt-6 py-2 px-4 rounded-lg font-semibold transition-all 
+    ${
+      isLoading
+        ? "bg-blue-400 cursor-not-allowed"
+        : "bg-blue-600 hover:bg-blue-700"
+    } 
+    text-white flex items-center justify-center`}
+          >
+            {isLoading ? (
+              <>
+                <svg
+                  className="animate-spin h-5 w-5 mr-2 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v8H4z"
+                  ></path>
+                </svg>
+                {t("form.submitting")}
+              </>
+            ) : (
+              t("form.submit")
+            )}
+          </button>
         </form>
+        {showSuccess && (
+          <div className="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-xl shadow-lg z-50">
+            {t("form.form_submitted")}
+          </div>
+        )}
+
+        {showError && (
+          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white font-semibold py-2 px-4 rounded-lg shadow-lg transition-opacity duration-500 z-50">
+            {t("form.error_message")}
+          </div>
+        )}
       </div>
 
       {/* Preview */}

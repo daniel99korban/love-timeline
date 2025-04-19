@@ -15,10 +15,12 @@ export const SpotifySearchDropdown = ({
   const [songQuery, setSongQuery] = useState<string>("");
   const [songSuggestions, setSongSuggestions] = useState<any[]>([]);
   const [isDropdownVisible, setDropdownVisible] = useState<boolean>(false);
+  const [isLoadingSongs, setIsLoadingSongs] = useState<boolean>(false);
 
   // Função para buscar músicas no Spotify
   async function searchSpotifyTracks(query: string) {
     try {
+      setIsLoadingSongs(true);
       const response = await api.get('/websites/search-music', {
         params: {
           search: query,
@@ -33,6 +35,8 @@ export const SpotifySearchDropdown = ({
       }
     } catch (error) {
       console.error("Erro na busca de músicas", error);
+    } finally {
+      setIsLoadingSongs(false);
     }
   }
 
@@ -78,6 +82,14 @@ export const SpotifySearchDropdown = ({
         placeholder={t("form.spotify_song_placeholder")}
         className="w-full py-2 px-4 rounded-lg bg-gray-700 border border-gray-600 text-gray-100 placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500/50 transition-all"
       />
+
+      {/* Loader enquanto busca as músicas */}
+      {isDropdownVisible && isLoadingSongs && (
+        <div className="flex justify-center mt-2">
+          <div className="w-6 h-6 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+        </div>
+      )}
+
       {isDropdownVisible && songSuggestions.length > 0 && (
         <ul className="bg-gray-800 border border-gray-600 mt-1 rounded-lg">
           {songSuggestions.map((track) => {
